@@ -1,0 +1,6 @@
+192.168.1.210 - - [30/Jul/2026:09:54:19 -0600] "GET / HTTP/1.1" 200 58 "-" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36"
+192.168.1.210 - - [30/Jul/2026:09:54:19 -0600] "GET /favicon.ico HTTP/1.1" 404 181 "http://192.168.1.89/" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36"
+127.0.0.1 - - [30/Jul/2026:09:56:07 -0600] "GET / HTTP/1.1" 200 58 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0"
+127.0.0.1 - - [30/Jul/2026:09:56:07 -0600] "GET /favicon.ico HTTP/1.1" 404 118 "http://localhost/" "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0"
+192.168.1.89 - - [30/Jul/2026:09:56:12 -0600] "GET / HTTP/1.1" 200 58 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0"
+192.168.1.89 - - [30/Jul/2026:09:56:12 -0600] "GET /favicon.ico HTTP/1.1" 404 118 "http://192.168.1.89/" "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0"
