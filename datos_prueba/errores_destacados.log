@@ -1,9 +1,0 @@
-[2026-07-28 10:16:12] ERROR: Conexión rechazada por la base de datos principal.
-[2026-07-28 10:18:22] [error] No se encontró el archivo de configuración /etc/app/config.json.
-[2026-07-28 10:20:15] CRITICAL: Fallo en el almacenamiento principal /dev/sda1 (Sin espacio).
-[2026-07-28 10:22:50] FATAL: Kernel panic - no se puede asignar memoria adicional al proceso.
-[2026-07-28 10:24:00] [Critical] Caída del servicio Nginx detectada por el monitor.
-[2026-07-28 10:26:14] Error: Token de autenticación expirado para el usuario 1042.
-[2026-07-28 10:28:45] [fatal] Interrupción no manejada en el hilo secundario #4.
-[2026-07-28 10:30:22] ERROR: Timeout al conectar con la pasarela de pagos externa.
-[2026-07-28 10:32:00] [CRITICAL] Certificado SSL expirado para el dominio api.local.
