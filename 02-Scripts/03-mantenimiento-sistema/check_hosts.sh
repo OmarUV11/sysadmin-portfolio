@@ -1,4 +1,4 @@
- #!/bin/bash 
+#!/bin/bash 
 STATIC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd )"
 FILE="$STATIC_DIR/datos_prueba_mantenimiento/hosts.txt"
 if [ ! -f "$FILE" ]; then 
