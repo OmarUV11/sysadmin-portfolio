@@ -1,0 +1,2 @@
+[Sat May 10 10:15:35.123456 2025] [core:error] [pid 1234] [client 127.0.0.1:54321] AH00126: Invalid URI in request GET /badurl HTTP/1.1
+[Sat May 10 10:16:10.654321 2025] [authz_core:error] [pid 1235] [client 127.0.0.1:54322] AH01630: client denied by server configuration: /var/www/html/admin
