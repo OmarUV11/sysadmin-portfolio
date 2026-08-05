@@ -1,0 +1,8 @@
+# Servicios web y base de datos
+nginx
+mariadb
+
+# Servicios de acceso remoto y tareas
+ssh
+cron
+servicio_falso_demo
