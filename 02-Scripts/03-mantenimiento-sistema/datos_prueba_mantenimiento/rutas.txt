@@ -1,0 +1,6 @@
+# Archivo de prueba para el Ejercicio 13
+/etc/passwd
+/var/log
+# Esta ruta no debería existir
+/ruta/que/no/existe/en/el/sistema
+/bin/bash
