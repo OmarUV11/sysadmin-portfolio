@@ -1,3 +1,0 @@
-El equipo de Monitoreo detectó un evento crítico recientemente: uno de nuestros servidores de producción se detuvo debido a que la partición raíz / se llenó al 100%. Esto provocó la caída imprevista de servicios y la interrupción de procesos del sistema.
-
-Para evitar que este incidente vuelva a impactar la disponibilidad, se requiere implementar un script automatizado en Bash que monitoree constantemente el consumo del disco, aplique acciones correctivas inmediatas ante un consumo elevado y registre todo el evento para trazabilidad del equipo de TI.
