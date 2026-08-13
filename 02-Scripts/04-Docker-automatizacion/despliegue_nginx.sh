@@ -12,7 +12,7 @@ IMG_DOCKER_NGINX="nginx:alpine"
 
 if [ -z "$NOMBRE_DOCKER" ] || [ -z "$PUERTO_DOCKER" ]; then 
 	echo -e "\033[31m---------------------------------------------\033[0m"
-	echo -e "\033[31m[ERROR] Uno o los  dos parametros no fueron pasados \033[0m" >&2
+	echo -e "\033[31m[ERROR] Uno o los dos parametros no fueron pasados \033[0m" >&2
 	echo -e "\033[31m---------------------------------------------\033[0m"
 	exit 1 
 fi
@@ -27,11 +27,14 @@ while read -r dockers; do
 done < <(docker ps -a --format '{{.Names}}')
 
 if ! docker run -d --name "$NOMBRE_DOCKER" -p "$PUERTO_DOCKER":80 "$IMG_DOCKER_NGINX" &>/dev/null; then 
-	echo -e  "\033[33m[Error]EL puerto : $PUERTO_DOCKER esta siendo utilizado por otro Docker" >&2
+	echo -e  "\033[31m[Error]EL puerto : $PUERTO_DOCKER esta siendo utilizado por otro Docker\033[0m" >&2
 	docker rm "$NOMBRE_DOCKER" &>/dev/null
 	exit 1
 else 
-	echo -e "\033[32m[EXITO]Se creado el docker NGINX con el nombre $NOMBRE_DOCKER\033[0m"	
+	echo -e "\033[32m [EXITO] Espere levantando el Docker ...\033[0m"
+	sleep 3
+	
+	echo -e "\033[32m [EXITO] Se creado el docker NGINX con el nombre $NOMBRE_DOCKER\033[0m"	
 fi 
 
 
