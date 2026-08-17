@@ -1,0 +1,52 @@
+#Gestionas UFW 
+
+#UFW tiene un comportamiento de salida y entrada que podemos definir de forma estandar
+#En un servido privado, lo ideal es poder aceptar todas la conexiones salientes 
+#(ya que estará gestionado y usado por nostros y ya ) y se deben de denegar todas las
+#conexiones entrantes para brindar una mayor seguridad al servidor. 
+#
+#
+
+
+#Deniega todas las conexiones entrantes 
+sudo ufw default denny incoming 
+
+#Permite todas las conexiones salientes 
+sudo ufw default allow outgoing 
+
+
+
+#PERMITIR CONEXIONES 
+
+#==============================================================================================================#
+#Para permitir conexines entrantes(ya que establecimos que por defecto no podemos permitir conexiones entrantes)
+#debemos espeficicar que ip o subnet, a un puerto especifico mediantes el comando ufw 
+#sudo ufw allow seguido de lo que queremos permtir sea ip , puerto o todas las conexiones entrantes 
+#===============================================================================================================#
+
+#Permitir conexiones de la red local 
+sudo ufw allow from 127.0.0.1
+
+#Pemirtir conexiones al servicio ssh mediante su puerto por defecto o estlecido en su configuracion 
+sudo ufw allow ssh 
+
+#Permitir conexines al servicio http y https, mediante su puerto y protocolo 
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+#Permitir todas la coxiones de un vpn o un red especifica 
+sudo ufw allow from 10.8.0.0/24
+
+#Permite la conexiones de un vpn si se requiere mediante el puerto que se le establecio 
+sudo ufw allo 3000
+
+
+#===================================================================================================================#
+[NOTA] El orden que se especifican las reglas del ufw importan por que se debe de crear o tener en cuenta el 
+orden que queremos que se evaluen, esto normalmente es de la que consideremos que tiene que ser mas restrictiva , hacia la que 
+queremos que sea menos restrictiva 
+#===================================================================================================================#
+
+#Para cargar la configuracion debemos de recargar nuestro corta fuegos para eso se ejecuta el comando:
+#con esto comenzare a funcionar las reglas establecidas 
+sudo ufw enable 

@@ -1,0 +1,144 @@
+#[Nota] Si el servicio ssh no quiere iniciar puede verificar su archivo sshd_config con 
+#Ayuda del comando sshd -t , este comando permite verificar si se tiene algun error o sintaxis 
+
+
+#Cambio del puerto que tiene el servidor por defecto por algun otro 
+
+Esa configuracion se realiza mediante, la edicion del archivo de configuracion sshd_config
+que se encuentra en el directorio /etc/ssh/sshd_config , lo que se debe de hacer es desmarcar la linea de #port 22 y colocar el 
+pueto que se quiere o que se utilizara para realizar la conexiones remotas al serividor.
+
+#port 22 
+#Desmarcamos y colocamos el que queremos utilizar 
+
+port 3000
+
+EL motivo principal por el cual se hace esto es por que los atacantes simpre van buscar el puerto 22 que viene por defecto 
+ya que muy pocas veces se cambia. 
+
+
+Con esto se evitan la mayoria de este tipo de ataque 
+
+#Limitacion de vinculaciones IP#
+La directiva ListenAddress especifica en qué direcciones IP se abrira el puerto 
+con el cual se estara brindado el servicio. Si el sistema dispones de mas de una IP 
+se verison IPv4 o IPv6 es conveniente limitar esta escucha unicamente a las que sean 
+necesarias. Por defecto viene en ALL , así que el servicio se abrira en todas las interfaces 
+disponibles del sistema. 
+
+ListenAddress 192.168.1.89
+
+#Deshabilitar el usuario ROOT para login 
+EL usuario administrador no deberia poder autenticarce en el servicio directamente contra el equipo. 
+Es importante configurar la opcion "PermitRootLogin no" , esta opcion limite la auntenticacion del 
+usuario root en el servicio de ssh,
+
+PermitRootLogin no 
+
+#Limitar el acceso al servicio SSH de los usuarios del sistema 
+Para establecer qué usuarios son los que tienen el acceso al servicio ssh, debemos establecer una linea en el archivo 
+de configuracion de ssh , "AllowUsers #lista de usuarios ", se puede configurar varios usuarios. La configuracion por defecto 
+,permite que todos los usuarios del sistema puedan iniciar sesion en el servicio de ssh, pero se recomienda solo establecer 
+los usuarios que realmente utilicen el servicio 
+
+AllowUsers 
+
+AL igual que AllowUsers tambien se puede establecer los grupos de usuarios que tiene permisos para utilizar el servicio 
+ssh 
+
+AllowGroups  
+
+#Deshabilitar contrseñas vacias 
+Para rechazar inicios de sesion remota, desde cuentas con contraseñas vacias 
+
+PermitEmptyPasswords no 
+
+#Limitar los intentos de autenticacion fallidas
+Para especificar el numero de intentos de autenticación fallidas por conexion. Recomendamos su configuracion 
+en un valor, estos son los intentos que tiene el usuario para logearse 
+
+MaxAuthTrie 3 
+
+
+#Desahabilitar inicio de sesión basado en contraseñas 
+Todos los inicio de sesion basados en contraseñas deben de estas deshabilitados. 
+Solo deben permitir permitir inicios de sesión basados en claves públicas 
+
+AuthenticationMethods publickey 
+PubkeyAuthentication yes 
+
+
+
+#versiones antiguas sshd 
+PubkeyAuthentication yes 
+
+
+
+
+#Ajustar el tiempo de LoginGraceTime 
+Con esta directiva establecemos el tiempo de conexion que tiene un usuario que intenta 
+realizar una conexion, no cuando esta dentro del sistema, sino cuando se esta autenticando 
+correctamete. Se recomienda un limite de 60 segundos por intento 
+
+LoginGraceTime 60
+
+#Limitar la cantidad de conexiones simultaneas no autenticadas 
+Con esta directiva limitaremos el número máximo permitido 
+de conexiones simultaneas no autenticadas, todos los intentos de conexio 
+seran denegados hasta que algunos de los intentos finalice el inicio de 
+sesion correctamete.
+
+Por defecto viene 10 intento, por recomendacion se deben de colocar 3
+
+MaxStartups 3
+
+#Agregar Banner de advertencia para los usuarios de SSH 
+
+Especifica el archivo que sera mostrado antes de la autenticacion de un usuario en el sistena 
+
+Banner /etc/issue
+
+
+
+#Configurar el intervalo de tiempo de espera de cierre de sesión inactiva 
+
+Se puede establecer un intervalo de tiempo de inactividad para las sesiones SSH.De forma 
+que si un usurio dejara la sesión desatendida, la misma se cirra en automatico despues 
+de un tiempo especificado. 
+
+ClientAliveInterval 300 
+ClientAliveCountMax 0 
+
+
+#Ignorar archivos RSH obsoletos, simplemente se tiene que desactivar el acceso inseguro a través de RSH
+SSH puede emultar el comportamiento del comando RSH obsoleto, el cual es el Remote Shell esta en desuso 
+porque no cifra los datos.Envie la contraseña y el texto de forma insegura o de forma insegura, lo que 
+permite que cualquier atacate pueda robar la informacion. 
+
+IgnoreRhosts yes 
+
+#Deshabilitar la autenticación basada en el host 
+Es recomendable desabilitar esta opcion, ya que en principio definimos que la autenticacion se 
+realizare mediante clave pública.
+
+HostbasedAuthenticacion no 
+
+#Deshabiitar X11forwarding 
+X11, es el servidor gráfico que usan casi todas las distribuciones Linux. Este 
+servidor permite, realizar forwarding a través de SSH. Esto significa 
+el poder ejecutar aplicaciones gráficas de una maquina remota exportando el display 
+de la terminal donde tenemos nuestro servicio .Es decir aplicaciones que se ejecuten 
+en el servidor remoto, pero la interfaz gráfica la visualizamos en nuestro escritorio local.
+
+forwarding 
+
+Asi que si no es necesario tener el servidor gráfico es mejor no tenerlo habilitado 
+
+X11forwarding no 
+
+#chroot (Bloquear usuarios del directorios de inicio)
+De forma predeterminada, los usuarios pueden navegar por los directorios del servidor, como 
+/etc, /bin. SSH se puede proteger usando Chroot para bloquear a los usuarios en directorios personales 
+
+  
+
