@@ -1,5 +1,8 @@
 #!/bin/bash 
-
+# DESCRIPCIÓN: Valida e instala localmente una imagen de Docker si no existe,
+#              y despliega un contenedor asignándole un nombre dinámico
+#              con mapeo de puertos al Host.
+# USO:         ./docker_runner.sh <nombre_imagen> [puerto_host]
 NOMBRE_IMG="$1"
 DATE=$(date '+%Y_%m_%d')
 echo "$NOMBRE_IMG"
