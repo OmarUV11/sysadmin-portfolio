@@ -1,0 +1,54 @@
+services:              
+         
+            db:
+                image: mysql
+                restart: always
+                container_name: db_mysql
+                environment:
+                      MYSQL_ROOT_PASSWORD: ghostpass
+                      MYSQL_DATABASE: ghostdb
+                      MYSQL_USER: ghostuser
+                      MYSQL_PASSWORD: ghostpass
+                
+                volumes:
+                    - db0:/var/lib/mysql 
+                networks:
+                  red_web:
+                             ipv4_address: 192.168.10.20
+                hostname: db_mysql
+
+            
+            ghost:
+                image: ghost:5-alpine
+                restart: always 
+                container_name: ghost_server
+                ports:
+                    - 3000:2368
+                environment:
+                    database__client: mysql 
+                    database__connection__host: db
+                    database__connection__user: ghostuser
+                    database__connection__password: ghostpass
+                    database__connection__database: ghostdb
+                depends_on:
+                    - db
+                volumes:
+                    - ghost_:/var/lib/ghost/content  
+                networks:
+                    red_web:
+                          ipv4_address: 192.168.10.21
+                hostname: ghost_server
+
+
+networks:
+    red_web:
+        ipam:
+            config:
+              - subnet: 192.168.10.0/24
+volumes:
+      db0:
+      ghost_:
+     
+      
+
+

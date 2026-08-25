@@ -1,0 +1,50 @@
+services:
+        db:
+            container_name: db_redmine
+            image: postgres
+            restart: always
+            environment:
+                  - POSTGRES_DB=redmineapp
+                  - POSTGRES_PASSWORD=redminepass
+                  - POSTGRES_USER=redmineuser
+            volumes:
+                  - db_redmine:/var/lib/postgresql
+       
+            networks:
+                    redmine_network:
+                            ipv4_address: 192.168.3.2
+            hostname: db_redmine
+        
+        redmine:
+                container_name: redmine
+                image: redmine
+                restart: always
+                ports: 
+                      - 3000:3000
+                environment:
+                      - REDMINE_DB_POSTGRES=db 
+                      - REDMINE_DB_USERNAME=redmineuser
+                      - REDMINE_DB_PASSWORD=redminepass
+                      - REDMINE_DB_DATABASE=redmineapp
+
+                volumes:
+                      - data_redmine:/usr/src/redmine/files
+
+                networks:
+                         redmine_network:
+                                    ipv4_address: 192.168.3.3
+                hostname: redmine
+              
+                depends_on:
+                        - db
+volumes:
+      db_redmine:
+      data_redmine:
+
+networks:
+      redmine_network:
+       driver: bridge
+       ipam:
+         config:
+            - subnet: 192.168.3.0/24      
+        

@@ -1,0 +1,11 @@
+services:
+        app:
+            container_name: redis_contenedor
+            image: redis
+            restart: always 
+            ports:
+                 - 6379:6379
+            volumes:
+                 - /path/to/sentinel.conf:/etc/redis/sentinel.conf:ro 
+
+            

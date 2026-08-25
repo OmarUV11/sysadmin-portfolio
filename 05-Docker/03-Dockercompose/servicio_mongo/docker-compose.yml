@@ -1,0 +1,16 @@
+services:  
+  app:         
+              container_name: mi_base_de_Datos
+              image: mongo
+              restart: always
+              ports:
+                    - 27017:27017 
+              environment:
+                    - MONGO_INITDB_ROOT_USERNAME=mongo
+                    - MONGO_INITDB_ROOT_PASSWORD=mongo123
+              volumes:
+                    - mongodb_config:/etc/mongo:ro    
+
+
+volumes:
+        mongodb_config:

@@ -1,0 +1,51 @@
+services:  
+         mariadb:
+                container_name: db_moodle
+                image: mariadb:11.4
+                restart: always
+                environment:
+                       - MYSQL_ROOT_PASSWORD=root123
+                       - MYSQL_DATABASE=campusvirtual
+                       - MYSQL_USER=moodle
+                       - MYSQL_PASSWORD=moodle123
+
+                volumes:
+                       - db_moodle:/var/lib/mysql 
+                hostname: db_moodle
+                networks:
+                       moodle_network:
+                                   ipv4_address: 192.168.2.2
+
+         moodle:
+                container_name: noodle
+                image: moodlehq/moodleapp
+                restart: always
+                ports:
+                    - 8090:443
+                environment:
+                    - MOODLE_DATABASE_HOST=mariadb
+                    - MOODLE_DATABASE_PORT_NUMBER=3306
+                    - MOODLE_DATABASE_USER=moodle 
+                    - MOODLE_DATABASE_NAME=campusvirtual
+                    - ALLOW_EMPTY_PASSWORD:yes 
+                volumes:
+                    - datos_moodle:/bitnami/moodle
+                    - datosmoodle_datos:/bitnami/moodledata
+                depends_on:
+                    - mariadb
+
+                networks:
+                       moodle_network:
+                                   ipv4_address: 192.168.2.3
+
+              
+volumes:
+        db_moodle:
+        datos_moodle:
+        datosmoodle_datos:
+
+networks:
+         moodle_network:
+                    ipam:
+                        config:
+                             - subnet: 192.168.2.0/24

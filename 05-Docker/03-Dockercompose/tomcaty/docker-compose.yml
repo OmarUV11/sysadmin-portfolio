@@ -1,0 +1,17 @@
+version: '3.1'
+services:
+  aplicacionjava:
+    container_name: tomcat
+    image: tomcat
+    restart: always
+    volumes:
+      - ./sample.war:/usr/local/tomcat/webapps/sample.war:ro
+  
+  proxy:
+      container_name: nginx_cat
+      image: nginx
+      ports:
+        - 8081:80
+      volumes:
+        - ./default.conf:/etc/nginx/conf.d
+

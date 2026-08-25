@@ -1,0 +1,36 @@
+services:
+          db:
+              image: mongo
+              container_name: db_mongo_express
+              restart: always
+              volumes:
+                   - mongo_datos3:/data/db
+              environment:
+                   MONGO_INITDB_ROOT_USERNAME: mongo
+                   MONGO_INITDB_ROOT_PASSWORD: mongo123
+              networks:
+                   - mongodb_network
+          app:
+              image: mongo-express
+              container_name: mongo-express
+              restart: always
+              ports:
+                    - 8081:8081
+              environment:
+                    ME_CONFIG_MONGODB_ADMINUSERNAME: mongo
+                    ME_CONFIG_MONGODB_ADMINPASSWORD: mongo123
+                    ME_CONFIG_MONGODB_SERVER: db
+                    ME_CONFIG_MONGODB_AUTH_DATABASE: admin
+
+                    ME_CONFIG_BASICAUTH_USERNAME: conde
+                    ME_CONFIG_BASICAUTH_PASSWORD: conde123
+              depends_on:
+                    - db
+              networks:
+                    - mongodb_network
+volumes:
+       mongo_datos3:
+
+networks:
+        mongodb_network:
+                  driver: bridge

@@ -1,0 +1,7 @@
+version: '1.2'
+services: 
+          app:
+              container_name: contenedor_alpine
+              image: alpine 
+              restart: always 
+              

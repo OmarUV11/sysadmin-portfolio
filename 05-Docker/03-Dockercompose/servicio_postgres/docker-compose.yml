@@ -1,0 +1,15 @@
+services:
+        db:
+           container_name: db_postgres
+           image: postgres:16
+           restart: always
+           ports:
+               - 5432:5432
+           volumes:
+               - post_db2:/var/lib/postgresql/data 
+           environment:
+               POSTGRES_PASSWORD: admin123
+               POSTGRES_USER: admin
+               POSTGRES_DB: empresa
+volumes:
+      post_db2:

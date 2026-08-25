@@ -1,0 +1,11 @@
+version: '3.1'
+services:
+  db:
+    container_name: contenedor_mariadb
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: asdasd
+    volumes:
+      - ./datos2:/var/lib/mysql
+

@@ -1,0 +1,50 @@
+services:
+              db:
+                  image: mariadb:10.5
+                  container_name: db_wordpress 
+                  restart: always
+                  volumes:
+                        - /opt/compose/data3:/var/lib/mysql
+                  environment:
+                      MARIADB_DATABASE: wordpressdb
+                      MARIADB_USER: pepe
+                      MARIADB_PASSWORD: pepe123
+                      MARIADB_ROOT_PASSWORD: asdasd
+                  networks:
+                    red_web:
+                        ipv4_address: 192.168.10.10
+              
+
+
+              app:
+                  image: wordpress
+                  container_name: servidor_wordpress
+                  restart: always 
+                  ports:
+                      - 80:80
+                  environment:
+                      WORDPRESS_DB_HOST: db
+                      WORDPRESS_DB_USER: pepe
+                      WORDPRESS_DB_PASSWORD: pepe123
+                      WORDPRESS_DB_NAME: wordpressdb
+                  
+                  volumes:
+                      - wordpress_datos:/var/www/html 
+
+                  depends_on:
+                      - db 
+                  networks:
+                        red_web:
+                            ipv4_address: 192.168.10.11
+
+networks:
+        red_web:
+           driver: bridge
+           ipam:
+              config:
+                  - subnet: 192.168.10.0/24 
+
+
+
+volumes:
+        wordpress_datos:
